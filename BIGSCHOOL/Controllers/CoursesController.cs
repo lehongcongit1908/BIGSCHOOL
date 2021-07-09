@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using BIGSCHOOL.Models;
 
+
+// thử code thẳng vào main luôn
 // sử dụng cho lấy user id
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
