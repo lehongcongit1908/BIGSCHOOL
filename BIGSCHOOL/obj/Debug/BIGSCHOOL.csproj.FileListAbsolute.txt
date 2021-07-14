@@ -106,3 +106,9 @@ C:\Users\admin\Desktop\THỰC HÀNH LT WEB\BIGSCHOOL\BIGSCHOOL\obj\Debug\BIGSCHO
 C:\Users\admin\Desktop\THỰC HÀNH LT WEB\BIGSCHOOL\BIGSCHOOL\obj\Debug\BIGSCHOOL.csproj.CopyComplete
 C:\Users\admin\Desktop\THỰC HÀNH LT WEB\BIGSCHOOL\BIGSCHOOL\obj\Debug\BIGSCHOOL.dll
 C:\Users\admin\Desktop\THỰC HÀNH LT WEB\BIGSCHOOL\BIGSCHOOL\obj\Debug\BIGSCHOOL.pdb
+C:\Users\admin\Desktop\THỰC HÀNH LT WEB\BIGSCHOOL\BIGSCHOOL\bin\System.Net.Http.Formatting.dll
+C:\Users\admin\Desktop\THỰC HÀNH LT WEB\BIGSCHOOL\BIGSCHOOL\bin\System.Web.Http.dll
+C:\Users\admin\Desktop\THỰC HÀNH LT WEB\BIGSCHOOL\BIGSCHOOL\bin\System.Web.Http.WebHost.dll
+C:\Users\admin\Desktop\THỰC HÀNH LT WEB\BIGSCHOOL\BIGSCHOOL\bin\System.Net.Http.Formatting.xml
+C:\Users\admin\Desktop\THỰC HÀNH LT WEB\BIGSCHOOL\BIGSCHOOL\bin\System.Web.Http.xml
+C:\Users\admin\Desktop\THỰC HÀNH LT WEB\BIGSCHOOL\BIGSCHOOL\bin\System.Web.Http.WebHost.xml

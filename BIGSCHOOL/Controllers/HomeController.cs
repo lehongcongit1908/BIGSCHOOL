@@ -12,10 +12,13 @@ namespace BIGSCHOOL.Controllers
     public class HomeController : Controller
     {
         BigSchoolContext db = new BigSchoolContext();
+        
 
         [Authorize]
         public ActionResult Index()
+            
         {
+            
             var upcomingCourse = db.Courses.Where(p => p.DateTime > DateTime.Now).OrderBy(p => p.DateTime).ToList();
             foreach (Course i in upcomingCourse)
             {
@@ -29,6 +32,7 @@ namespace BIGSCHOOL.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+            
 
             return View();
         }
