@@ -15,6 +15,10 @@ namespace BIGSCHOOL.Models
             Attendances = new HashSet<Attendance>();
         }
 
+        public List<Category> ListCategory = new List<Category>();
+        public bool isLogin = false;
+        public bool isShowGoing = false;
+        public bool isShowFollow = false;
         public int Id { get; set; }
 
         [StringLength(255)]
@@ -23,10 +27,6 @@ namespace BIGSCHOOL.Models
         [Required]
         [StringLength(128)]
         public string LectureId { get; set; }
-
-
-        [StringLength(255)]
-        public string LectureName { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -37,12 +37,12 @@ namespace BIGSCHOOL.Models
 
         public int CategoryId { get; set; }
 
+        [StringLength(255)]
+        public string LectureName { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }
 
         public virtual Category Category { get; set; }
-
-        // add list category;
-        public List<Category> ListCategory = new List<Category>();
     }
 }

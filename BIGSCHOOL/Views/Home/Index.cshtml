@@ -31,39 +31,81 @@
                 </div>
                 <div class="detail">
                     <span class="lecture">
-                        @course.Name --
-                      
+                        @course.Name 
+                        @if (course.isLogin)
+                        {
+                            if (course.isShowFollow)
+                            {
+                                <button data-user-id="@course.LectureId" class="btn btn-default btn-sm js-tongle-follow">  Follow</button>
+
+                            }
+                            else
+                            {
+                                <button data-user-id="@course.LectureId" class="btn btn-success btn-sm js-tongle-follow">  Following</button>
+
+                            }
+
+
+
+                        }
+                        
+
                     </span>
+                    <br />
                     <span class="category">
-                        @course.Category.Name
+                        @course.Category.Name -- @course.Id
+                        @if (course.isLogin)
+                        {
+                            if (course.isShowFollow)
+                            {
+                                <button data-course-id="@course.Id" class="btn btn-default btn-sm js-tongle-attendance">Going?</button>
+
+
+                            }
+                            else
+                            {
+                                <button data-course-id="@course.Id" class="btn btn-success btn-sm js-tongle-attendance">Going</button>
+
+                            }
+
+                        }
+
 
                     </span>
                    
-                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-tongle-attendance">Tham gia?</button>
+                    
+
                 </div>
-
-
-
-                @*@course.DateTime.ToString("dd/MM/yyyy HH:mm") -- @course.Name -- @course.Category.Name*@
+           
             </li>
         }
     </ul>
 
 
-    @section script {
+    @section script1 {
         <script>
             $(document).ready(function () {
                 $(".js-tongle-attendance").click( function (e){
                     var button = $(e.target);
-                    $.post("/api/attendances", { Id: button.attr("data-course-id") })
+                    $.post("/api/attendances", { Id: button.attr("data - course - id" ) })
                         .done(function () {
                             alert("Register course sucessfully")
-                            button
-                                .removeClass("btn-default")
-                                .addClass("btn-info")
-                                .text("Going");
+                            button.removeClass("btn-default")
+                            button.addClass("btn-info")
+                            button.text("Going");
                         }).fail(function(){
                             alert("Something Fail");
+                        });
+                });
+
+                $(".js-tongle-follow").click(function (e) {
+                    var button = $(e.target);
+                    $.post("/api/followings", { FolloweeId: button.attr("data-user-id") })
+                        .done(function () {
+                            button.text("Following");
+                            alert("Follow sucessfully!")
+                        }).fail(function () {
+                            alert("Something fail");
                         });
                 });
 });
