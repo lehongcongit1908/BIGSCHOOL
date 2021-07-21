@@ -82,12 +82,12 @@
     </ul>
 
 
-    @section script1 {
+    @section script {
         <script>
             $(document).ready(function () {
                 $(".js-tongle-attendance").click( function (e){
                     var button = $(e.target);
-                    $.post("/api/attendances", { Id: button.attr("data - course - id" ) })
+                    $.post("/api/Attendances", { Id: button.attr("data-course-id" ).toString() })
                         .done(function () {
                             alert("Register course sucessfully")
                             button.removeClass("btn-default")
