@@ -5,16 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Mine</h2>
+<h2>Khóa học của tôi</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <div class="row">
     <ul class="course">
         @foreach (var course in Model)
         {
-            <li>
+            <li> @course.LectureName == @course.Category.Name</li>
+            @*<li>
                 <div class="date">
                     <div class="month">
                         @course.DateTime.ToString("MM")
@@ -47,7 +48,7 @@
                     </div>
 
                 </div>
-            </li>
+            </li>*@
 
         }
 
@@ -55,4 +56,3 @@
 
 </div>
 
-<

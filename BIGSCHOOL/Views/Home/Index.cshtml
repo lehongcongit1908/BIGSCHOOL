@@ -8,8 +8,10 @@
 </p>
 
 @using BIGSCHOOL.Models;
+@model  IEnumerable<BIGSCHOOL.Models.Course>
 @{ ViewBag.Title = "Home Page"; }
 
+<h3> Danh sách khóa học sắp tới</h3>
 <div class="row">
     <ul class="course">
         @foreach (var course in Model)
@@ -17,52 +19,55 @@
             <li>
                 <div class="date">
                     <div class="month">
+                        @*@course.DateTime.ToString("dd/MM/yyyy HH:mm")*@
                         @course.DateTime.ToString("MM")
 
                     </div>
                     <div class="day">
-                        @course.DateTime.ToString("dd")
+                      @course.DateTime.ToString("dd")
 
                     </div>
 
                 </div>
                 <div class="detail">
                     <span class="lecture">
-                        @course.Name
+                        @course.Name --
                       
                     </span>
-                    <span class="lecture">
+                    <span class="category">
                         @course.Category.Name
 
                     </span>
                    
-                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-tongle-attendance">Going?</button>
+                    <button data-course-id="@course.Id" class="btn btn-default btn-sm js-tongle-attendance">Tham gia?</button>
                 </div>
 
 
 
-                @*@course.DateTime.ToString("dd/MM/yyyy HH:mm") -@course.Name - @course.Category.Name*@
+                @*@course.DateTime.ToString("dd/MM/yyyy HH:mm") -- @course.Name -- @course.Category.Name*@
             </li>
         }
     </ul>
 
 
     @section script {
-        <script>$(document).ready(function () {
-                $(".js-tongle-attendance").click(funtion(e){
+        <script>
+            $(document).ready(function () {
+                $(".js-tongle-attendance").click( function (e){
                     var button = $(e.target);
-                    $.post("/api.attendances", { Id: button.attr("data-course-id") })
+                    $.post("/api/attendances", { Id: button.attr("data-course-id") })
                         .done(function () {
                             alert("Register course sucessfully")
                             button
                                 .removeClass("btn-default")
                                 .addClass("btn-info")
                                 .text("Going");
-                        }).fail(funtion(){
-                            alert("Something Fail")
+                        }).fail(function(){
+                            alert("Something Fail");
                         });
                 });
-            });</script>
+});
+        </script>
     }
 
 </div>

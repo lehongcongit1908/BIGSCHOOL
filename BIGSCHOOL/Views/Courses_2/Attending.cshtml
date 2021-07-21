@@ -5,43 +5,42 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Attending</h2>
+<h2>Khóa học tôi đang tham dự</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <div class="row">
     <ul class="course">
         @foreach(var course in Model)
             {
                 <li>
                     <div class="date">
-                        <div class="month">
-                            @course.DateTime.ToString("MM")
-                        </div>
+                            <div class="month">
+                                @course.DateTime.ToString("MM")
+                            </div>
 
-                        <div class="day">
+                            <div class="day">
 
-                            @course.DateTime.ToString("dd")
-                        </div>
+                                @course.DateTime.ToString("dd")
+                            </div>
+                    </div>
 
-                        <div class="detail">
-                            <span class="lecture">
-                                @course.LectureName
+                    <div class="detail">
+                        <span class="lecture">
+                            @course.LectureName
 
-                            </span>
-                            <br />
+                        </span>
+                        <br />
 
-                            <span class="category">
-                                @course.Category.Name
+                        <span class="category">
+                            @course.Category.Name
 
-                            </span>
+                        </span>
 
 
-
-                        </div>
 
                     </div>
+
+                  
                 </li>
             }
 
