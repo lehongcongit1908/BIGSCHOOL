@@ -5,47 +5,34 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BIGSCHOOL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using BIGSCHOOL.Models;
-
 using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Routing;
-using BIGSCHOOL.DTO;
-
 
 namespace BIGSCHOOL.Controllers
 {
     public class AttendancesController : ApiController
     {
         [HttpPost]
-        public IHttpActionResult Attendances( AttendancesDTO attendanceDto)
+        public IHttpActionResult Attend(Course attendanceDto)
         {
-            BigSchoolContext db = new BigSchoolContext();
-            var userId = User.Identity.GetUserId();
-            if (db.Attendances.Any(a => a.Attendee == userId && a.CourseID == attendanceDto.CourseId))
+            var userID = User.Identity.GetUserId();
+            BigSchoolContext context = new BigSchoolContext();
+            if (context.Attendances.Any(p => p.Attendee == userID && p.CourseID == attendanceDto.Id))
             {
-                return BadRequest("The Attendance already exists !");
+                // return BadRequest("The attendance already exists!");
+                // xóa thông tin khóa học đã đăng ký tham gia trong bảng Attendances
+                context.Attendances.Remove(context.Attendances.SingleOrDefault(p => p.Attendee == userID && p.CourseID == attendanceDto.Id));
+                context.SaveChanges();
+                return Ok("cancel");
             }
-            var attendance = new Attendance
+            var attendance = new Attendance()
             {
-                Attendee = userId,
-                CourseID = attendanceDto.CourseId
-
+                CourseID = attendanceDto.Id,
+                Attendee =  User.Identity.GetUserId()
             };
-            db.Attendances.Add(attendance);
-            db.SaveChanges();
+            context.Attendances.Add(attendance);
+            context.SaveChanges();
             return Ok();
+
         }
     }
 }

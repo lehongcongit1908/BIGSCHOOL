@@ -24,14 +24,14 @@
 
                     </div>
                     <div class="day">
-                      @course.DateTime.ToString("dd")
+                        @course.DateTime.ToString("dd")
 
                     </div>
 
                 </div>
                 <div class="detail">
                     <span class="lecture">
-                        @course.Name 
+                        @course.Name
                         @if (course.isLogin)
                         {
                             if (course.isShowFollow)
@@ -48,7 +48,7 @@
 
 
                         }
-                        
+
 
                     </span>
                     <br />
@@ -72,44 +72,103 @@
 
 
                     </span>
-                   
-                    
+
+
 
                 </div>
-           
+
             </li>
         }
     </ul>
 
 
-    @section script {
-        <script>
-            $(document).ready(function () {
-                $(".js-tongle-attendance").click( function (e){
-                    var button = $(e.target);
-                    $.post("/api/Attendances", { Id: button.attr("data-course-id" ).toString() })
-                        .done(function () {
-                            alert("Register course sucessfully")
-                            button.removeClass("btn-default")
-                            button.addClass("btn-info")
-                            button.text("Going");
-                        }).fail(function(){
-                            alert("Something Fail");
-                        });
-                });
 
-                $(".js-tongle-follow").click(function (e) {
-                    var button = $(e.target);
-                    $.post("/api/followings", { FolloweeId: button.attr("data-user-id") })
-                        .done(function () {
-                            button.text("Following");
-                            alert("Follow sucessfully!")
-                        }).fail(function () {
-                            alert("Something fail");
-                        });
-                });
-});
+
+    @section scripts{
+        <script>
+           
+            $(".js-tongle-attendance").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/Attendances", { Id: button.attr("data-course-id") })
+                    .done(function (result) {
+                        if (result == "cancel") {
+                            alert("Cancel register course sucessfully!")
+                            button
+                                .removeClass("btn-info")
+                                .addClass("btn-default")
+                                .text("Going?");
+                        } else {
+                            alert("Register course sucessfully!")
+                            button
+                                .removeClass("btn-default")
+                                .addClass("btn-info")
+                                .text("Going");
+                        }
+                    }).fail(function () {
+                        alert("Something fail");
+                    });
+            });
+            $(".js-tongle-follow").click(function (e) {
+                var button = $(e.target);
+                var followee = button.attr("data-user-id");
+                $.post("/api/Following", { FolloweeId: button.attr("data-user-id") })
+                    .done(function (result) {
+                        if (result == "cancel") {
+                            $('.js-tongle-follow').each(function (i, obj) {
+                                if ($(this).attr('data-user-id') == followee) {
+                                    $(this).removeClass("btn-success")
+                                        .addClass("btn-default")
+                                        .text("Follow");
+                                }
+                            });
+                            alert("unFollow Thành công")
+                        } else {
+                            $('.js-toggle-follow').each(function (i, obj) {
+                                if ($(this).attr('data-user-id') == followee) {
+                                    $(this).removeClass("btn-default")
+                                        .addClass("btn-success")
+                                        .text("Following");
+                                }
+                            });
+                            alert("Follow Thành Công")
+                        }
+                    }).fail(function () {
+                       @* alert("Something fail");*@
+                         alert("Không thể tự follow chính mình");
+                    });
+            });
+               
         </script>
     }
+
+    @* @section script {
+                <script>
+                    $(document).ready(function () {
+                        $(".js-tongle-attendance").click( function (e){
+                            var button = $(e.target);
+                            $.post("/api/Attendances", { Id: button.attr("data-course-id" ).toString() })
+                                .done(function () {
+                                    alert("Register course sucessfully")
+                                    button.removeClass("btn-default")
+                                    button.addClass("btn-info")
+                                    button.text("Going");
+                                }).fail(function(){
+                                    alert("Something Fail");
+                                });
+                        });
+
+                        $(".js-tongle-follow").click(function (e) {
+                            var button = $(e.target);
+                            $.post("/api/followings", { FolloweeId: button.attr("data-user-id") })
+                                .done(function () {
+                                    button.text("Following");
+                                    alert("Follow sucessfully!")
+                                }).fail(function () {
+                                    alert("Something fail");
+                                });
+                        });
+        });
+                </script>
+            }*@
 
 </div>
