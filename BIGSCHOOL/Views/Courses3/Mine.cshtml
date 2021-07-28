@@ -31,20 +31,20 @@
 
             @foreach (var item in Model)
             {
-            <tr>
-                <td>@item.DateTime.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>@item.LectureName</td>
-                <td>@item.Category.Name</td>
-                <td>@item.Place</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit","Courses_2", new { id = item.Id }) |
-                  @*  @Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
+                <tr>
+                    <td>@item.DateTime.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.LectureName</td>
+                    <td>@item.Category.Name</td>
+                    <td>@item.Place</td>
+                    <td>
+                        <a href="/Courses3/Edit/@item.Id">Sửa</a> |
+                       
+                        <a href="/Courses3/Delete/@item.Id">Xóa</a> 
+                    </td>
 
 
 
-            </tr>
+                </tr>
 
             }
 

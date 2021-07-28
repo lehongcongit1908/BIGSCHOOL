@@ -184,7 +184,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
-    <Compile Include="Controllers\Courses_2Controller.cs" />
+    <Compile Include="Controllers\Courses3Controller.cs" />
     <Compile Include="Controllers\FollowingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -270,6 +270,16 @@
     <Content Include="Views\Courses_2\Attending.cshtml" />
     <Content Include="Views\Courses_2\Mine.cshtml" />
     <Content Include="Views\Courses_2\LectureIamGoing.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Courses3\Create.cshtml" />
+    <Content Include="Views\Courses3\Delete.cshtml" />
+    <Content Include="Views\Courses3\Details.cshtml" />
+    <Content Include="Views\Courses3\Edit.cshtml" />
+    <Content Include="Views\Courses3\Index.cshtml" />
+    <Content Include="Views\Courses_2\Edit.cshtml" />
+    <Content Include="Views\Courses3\Attending.cshtml" />
+    <Content Include="Views\Courses3\Mine.cshtml" />
+    <Content Include="Views\Courses3\LectureIamGoing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

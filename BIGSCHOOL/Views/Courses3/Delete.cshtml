@@ -1,0 +1,59 @@
+﻿@model BIGSCHOOL.Models.Course
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>Bạn chắc chắc muốn xóa khóa học</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Tên khóa học
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+
+        <dt>
+           Mã giảng viên(Bạn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LectureId)
+        </dd>
+
+        <dt>
+           Địa điểm
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Place)
+        </dd>
+
+        <dt>
+           Thời gian
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTime)
+        </dd>
+
+       
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <h3><input type="submit" value="Xóa" class="btn btn-default" /> </h3>
+           
+        </div>
+    }
+</div>

@@ -1,14 +1,16 @@
 ﻿@model IEnumerable<BIGSCHOOL.Models.Course>
+
 @{
-    ViewBag.Title = "LectureIamGoing";
+    ViewBag.Title = "Attending";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<br />
 
 
 <div class="panel panel-success">
     <div class="panel-heading">
-        <strong class="panel-title">GỈANG VIÊN TÔI ĐANG THEO DÕI</strong>
+        <strong class="panel-title">KHÓA HỌC ĐANG THAM GIA</strong>
     </div>
     <table class="table table-hover table-condensed">
         <thead class="bg-danger">
@@ -24,15 +26,15 @@
 
             @foreach (var item in Model)
             {
-            <tr>
-                <td>@item.DateTime.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>@item.LectureName</td>
-                <td>@item.Category.Name</td>
-                <td>@item.Place</td>
+                <tr>
+                    <td>@item.DateTime.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.LectureName</td>
+                    <td>@item.Category.Name</td>
+                    <td>@item.Place</td>
 
 
 
-            </tr>
+                </tr>
 
             }
 
@@ -40,4 +42,3 @@
         </tbody>
     </table>
 </div>
-

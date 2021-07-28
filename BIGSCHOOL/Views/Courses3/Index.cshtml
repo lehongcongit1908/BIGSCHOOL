@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <strong class="panel-title">DANH SÁCH KHÓA HỌC SẮP TỚI</strong>
+    </div>
+    <table class="table table-hover table-condensed">
+        <thead class="bg-danger">
+            <tr>
+                <th>Thời gian bắt đầu</th>
+                <th>Giảng viên</th>
+                <th>Tên khóa học</th>
+                <th>Địa điểm</th>
+                <th>Trạng thái</th>
+                <th>Tham gia</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DateTime.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.Name</td>
+                    <td>@item.Category.Name</td>
+                    <td>@item.Place</td>
+                    <td>
+                        @if (item.isLogin)
+                        {
+                            if (item.isShowFollow)
+                            {
+                                <button data-user-id="@item.LectureId" class="btn btn-default btn-sm js-tongle-follow">  Theo dõi?</button>
+
+                            }
+                            else
+                            {
+                                <button data-user-id="@item.LectureId" class="btn btn-success btn-sm js-tongle-follow">  Đang theo dõi</button>
+
+                            }
+
+
+
+                        }
+                    </td>
+
+                    <td>
+                        @if (item.isLogin)
+                        {
+                            if (item.isShowGoing)
+                            {
+                                <button data-course-id="@item.Id" class="btn btn-default btn-sm js-tongle-attendance">Tham gia?</button>
+
+
+                            }
+                            else
+                            {
+                                <button data-course-id="@item.Id" class="btn btn-success btn-sm js-tongle-attendance">Đã tham gia</button>
+
+                            }
+
+                        }
+
+                    </td>
+
+
+
+                </tr>
+
+            }
+
+
+        </tbody>
+    </table>
+
+
+
+
+
+    @section scripts{
+        <script>
+
+            $(".js-tongle-attendance").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/Attendances", { Id: button.attr("data-course-id") })
+                    .done(function (result) {
+                        if (result == "cancel") {
+                            alert("Hủy bỏ tham gia khóa học!!")
+                            button
+                                .removeClass("btn-success")
+                                .addClass("btn-default")
+                                .text("Tham gia?");
+                        } else {
+                            alert("Tham gia khóa học thành công!!")
+                            button
+                                .removeClass("btn-default")
+                                .addClass("btn-success")
+                                .text("Đã tham gia");
+                        }
+                    }).fail(function () {
+                        alert("Something fail");
+                    });
+            });
+           @* $(".js-tongle-follow").click(function (e) {
+                var button = $(e.target);
+                var followee = button.attr("data-user-id");
+                $.post("/api/Following", { FolloweeId: button.attr("data-user-id") })
+                    .done(function (result) {
+                        if (result == "cancel") {
+                            $('.js-tongle-follow').each(function (i, obj) {
+                                if ($(this).attr('data-user-id') == followee) {
+                                    $(this).removeClass("btn-success")
+                                        .addClass("btn-default")
+                                        .text("Theo dõi?");
+                                }
+                            });
+                            alert("Hủy bỏ theo dõi !! ")
+                        } else {
+                            $('.js-toggle-follow').each(function (i, obj) {
+                                if ($(this).attr('data-user-id') == followee) {
+                                    $(this).removeClass("btn-default")
+                                        .addClass("btn-success")
+                                        .text("Đang theo dõi <3");
+                                }
+                            });
+                            alert("Theo dõi thành công <3")
+                        }
+                    }).fail(function () {
+
+                         alert("Không thể tự theo dõi chính mình");
+                    });
+            });*@
+
+
+
+            $(".js-tongle-follow").click(function (e) {
+                var button = $(e.target);
+                var followee = button.attr("data-user-id");
+                $.post("/api/Following", { FolloweeId: button.attr("data-user-id") })
+                    .done(function (resp) {
+                        if (resp == "cancel") {
+                            $('.js-tongle-follow').each(function (i, obj) {
+                                if ($(this).attr('data-user-id') == followee) {
+                                    $(this).removeClass("btn-success")
+                                        .addClass("btn-default")
+                                        .text("Theo dõi?");
+                                }
+                            });
+                            alert("Bỏ theo dõi thành công")
+                        }
+                        else {
+                            $('.js-tongle-follow').each(function (i, obj) {
+                                if ($(this).attr('data-user-id') == followee) {
+                                    $(this).removeClass("btn-default")
+                                        .addClass("btn-success")
+                                        .text("Đang theo dõi");
+                                }
+                            });
+                            alert("Theo dõi thành công")
+                        }
+                    })
+                    .fail(function () {
+                        alert("Không thể tự theo dõi chính mình!");
+                    })
+            })
+
+
+        </script>
+    }
+
+</div>
+
+

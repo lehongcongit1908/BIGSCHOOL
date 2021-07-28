@@ -36,12 +36,12 @@
                         {
                             if (course.isShowFollow)
                             {
-                                <button data-user-id="@course.LectureId" class="btn btn-default btn-sm js-tongle-follow">  Follow</button>
+                                <button data-user-id="@course.LectureId" class="btn btn-default btn-sm js-tongle-follow">  Theo dõi?</button>
 
                             }
                             else
                             {
-                                <button data-user-id="@course.LectureId" class="btn btn-success btn-sm js-tongle-follow">  Following</button>
+                                <button data-user-id="@course.LectureId" class="btn btn-success btn-sm js-tongle-follow">  Đang theo dõi</button>
 
                             }
 
@@ -56,15 +56,15 @@
                         @course.Category.Name -- @course.Id
                         @if (course.isLogin)
                         {
-                            if (course.isShowFollow)
+                            if (course.isShowGoing)
                             {
-                                <button data-course-id="@course.Id" class="btn btn-default btn-sm js-tongle-attendance">Going?</button>
+                                <button data-course-id="@course.Id" class="btn btn-default btn-sm js-tongle-attendance">Tham gia?</button>
 
 
                             }
                             else
                             {
-                                <button data-course-id="@course.Id" class="btn btn-success btn-sm js-tongle-attendance">Going</button>
+                                <button data-course-id="@course.Id" class="btn btn-success btn-sm js-tongle-attendance">Đã tham gia</button>
 
                             }
 
@@ -92,17 +92,17 @@
                 $.post("/api/Attendances", { Id: button.attr("data-course-id") })
                     .done(function (result) {
                         if (result == "cancel") {
-                            alert("Cancel register course sucessfully!")
+                            alert("Hủy bỏ tham gia khóa học!!")
                             button
-                                .removeClass("btn-info")
+                                .removeClass("btn-success")
                                 .addClass("btn-default")
-                                .text("Going?");
+                                .text("Tham gia?");
                         } else {
-                            alert("Register course sucessfully!")
+                            alert("Tham gia khóa học thành công <3!")
                             button
                                 .removeClass("btn-default")
-                                .addClass("btn-info")
-                                .text("Going");
+                                .addClass("btn-success")
+                                .text("Đã tham gia");
                         }
                     }).fail(function () {
                         alert("Something fail");
@@ -118,57 +118,29 @@
                                 if ($(this).attr('data-user-id') == followee) {
                                     $(this).removeClass("btn-success")
                                         .addClass("btn-default")
-                                        .text("Follow");
+                                        .text("Theo dõi?");
                                 }
                             });
-                            alert("unFollow Thành công")
+                            alert("Hủy bỏ theo dõi !! ")
                         } else {
                             $('.js-toggle-follow').each(function (i, obj) {
                                 if ($(this).attr('data-user-id') == followee) {
                                     $(this).removeClass("btn-default")
                                         .addClass("btn-success")
-                                        .text("Following");
+                                        .text("Đang theo dõi <3");
                                 }
                             });
-                            alert("Follow Thành Công")
+                            alert("Theo dõi thành công <3")
                         }
                     }).fail(function () {
                        @* alert("Something fail");*@
-                         alert("Không thể tự follow chính mình");
+                         alert("Không thể tự theo dõi chính mình");
                     });
             });
                
         </script>
     }
 
-    @* @section script {
-                <script>
-                    $(document).ready(function () {
-                        $(".js-tongle-attendance").click( function (e){
-                            var button = $(e.target);
-                            $.post("/api/Attendances", { Id: button.attr("data-course-id" ).toString() })
-                                .done(function () {
-                                    alert("Register course sucessfully")
-                                    button.removeClass("btn-default")
-                                    button.addClass("btn-info")
-                                    button.text("Going");
-                                }).fail(function(){
-                                    alert("Something Fail");
-                                });
-                        });
-
-                        $(".js-tongle-follow").click(function (e) {
-                            var button = $(e.target);
-                            $.post("/api/followings", { FolloweeId: button.attr("data-user-id") })
-                                .done(function () {
-                                    button.text("Following");
-                                    alert("Follow sucessfully!")
-                                }).fail(function () {
-                                    alert("Something fail");
-                                });
-                        });
-        });
-                </script>
-            }*@
+   
 
 </div>

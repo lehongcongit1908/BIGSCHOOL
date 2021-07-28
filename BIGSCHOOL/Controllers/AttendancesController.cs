@@ -29,6 +29,7 @@ namespace BIGSCHOOL.Controllers
                 CourseID = attendanceDto.Id,
                 Attendee =  User.Identity.GetUserId()
             };
+            
             context.Attendances.Add(attendance);
             context.SaveChanges();
             return Ok();
